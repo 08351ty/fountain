@@ -4,7 +4,7 @@ import random
 import math
 from starkware.starknet.testing.starknet import Starknet
 from lib import *
-from visualizer import *
+# from visualizer import *
 import asyncio
 
 ERR_TOL = 1e-5
@@ -28,7 +28,7 @@ async def test_game ():
 
         level = 0
 
-        velocity_magnitude = sqrt(2*145**2)
+        velocity_magnitude = math.sqrt(2*145**2)
         theta = random.uniform(0, 1) * math.pi * 2
         move_x = int(velocity_magnitude * math.cos(theta) *FP)
         move_y = int(velocity_magnitude * math.sin(theta) *FP)
@@ -47,7 +47,7 @@ async def test_game ():
         print(f'solution_id = {ret.result.solution_id}')
         print(f'solution_family = {ret.result.solution_family}')
         print(f'score = {ret.result.score}')
-        print(f'n_steps: {ret.call_info.execution_resources.n_steps}')
+        # print(f'n_steps: {ret.call_info.execution_resources.n_steps}')
 
         events = ret.main_call_events
         if len(events)>0:
@@ -71,7 +71,7 @@ async def test_game ():
         msg1 = f'scored {ret.result.score} - not a solution.'
         msg2 = ''
 
-    visualize_game (arr_obj_s, msg1, msg2, loop=True)
+    # visualize_game (arr_obj_s, msg1, msg2, loop=True)
 
 def unpack_family_to_occurrences (family):
     # unpacking means deserialization, where serialization is add & shift by 28
