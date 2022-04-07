@@ -61,7 +61,7 @@ async def test_game ():
 
         occurrences = unpack_family_to_occurrences (ret.result.solution_family)
         print(f'collision occurrences: {occurrences}')
-        if ret.result.score > 500:
+        if ret.result.score > 470:
             break
 
     if ret.result.is_solution and ret.result.is_solution_family_new:
