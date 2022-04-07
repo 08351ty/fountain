@@ -34,11 +34,13 @@ async def test_game ():
         move_y = int(velocity_magnitude * math.sin(theta) *FP)
         move = contract.Vec2 (move_x, move_y)
 
-        ret = await contract.submit_move_for_level (
-            level = level,
-            move_x = move_x,
-            move_y = move_y
-        ).invoke()
+        try:
+            ret = await contract.submit_move_for_level (
+                level = level,
+                move_x = move_x,
+                move_y = move_y
+            ).invoke()
+        except: continue
 
         print(f'selected level: {level}')
         print(f'submitted move: {(move[0]/FP, move[1]/FP)}')
@@ -59,7 +61,8 @@ async def test_game ():
 
         occurrences = unpack_family_to_occurrences (ret.result.solution_family)
         print(f'collision occurrences: {occurrences}')
-        break
+        if ret.result.score > 700:
+            break
 
     if ret.result.is_solution and ret.result.is_solution_family_new:
         msg1 = f'found a *new* solution; id={ret.result.solution_id}'
